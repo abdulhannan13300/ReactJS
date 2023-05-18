@@ -1,16 +1,27 @@
 import './App.css';
 
 function App() {
-  const age = 19;
-  const isGreen = true;
-
+  const users = [
+    { name:"jack", age:22 },
+    { name:"jessica", age:24},
+    { name:"mike", age:"25"},
+  ];
   return ( 
     <div className="App"> 
-      {age >= 18 ? <h1>OVER AGE</h1> : <h1> UNDER AGE </h1> }
-      <h1 style={{ color: isGreen ? "green" : "red" }}> This has Color</h1>
+      {users.map((user, key) => {
+        return <User name={user.name} age={user.age}/>;
+      })}
     </div>
   );
 }
+const User = (props) => {
+  return ( 
+    <div>
+      {props.name} {props.age}
+    </div>
+  );  
+}
+
+
 
 export default App;
-

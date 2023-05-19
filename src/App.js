@@ -1,27 +1,27 @@
 import './App.css';
 
 function App() {
-  const users = [
-    { name:"jack", age:22 },
-    { name:"jessica", age:24},
-    { name:"mike", age:"25"},
-  ];
+const planets = [
+  { name:"Mars", isGasPlanet:false },
+  { name:"Jupiter", isGasPlanet:true },
+  { name:"Saturn", isGasPlanet:false },
+  { name:"Earth", isGasPlanet:false },
+  { name:"Venus", isGasPlanet:false },
+  { name:"Mercury", isGasPlanet:false },
+  { name:"Neptune", isGasPlanet:true },
+  { name:"Uranus", isGasPlanet:true },
+];
+
   return ( 
     <div className="App"> 
-      {users.map((user, key) => {
-        return <User name={user.name} age={user.age}/>;
+      {planets.map((planet) => {
+        return (
+          planet.isGasPlanet && <h1>{planet.name}</h1>
+        );
       })}
     </div>
   );
 }
-const User = (props) => {
-  return ( 
-    <div>
-      {props.name} {props.age}
-    </div>
-  );  
-}
-
 
 
 export default App;

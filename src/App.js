@@ -3,19 +3,19 @@ import {useState} from 'react';
 
 function App() {
 
-  const [inputValue,setInputValue] = useState("");
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  }
+  const [showText, setShowText] = useState(true)
 
   return ( 
     <div className="App"> 
-    <input type='text' onChange={handleInputChange}/>
-     <br></br>{inputValue}
+    <button onClick={() => {
+      setShowText(!showText);    
+      }}>
+      Show/Hide
+    </button>
+    {showText && <h1>Hi I am Abdul Hannan</h1>}
     </div> 
   );
 }
 
 
 export default App;
-

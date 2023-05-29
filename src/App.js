@@ -1,30 +1,30 @@
-import axios from 'axios';
 import './App.css';
-import { useState } from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { Home } from './pages/Home';
+import { Profile } from './pages/Profile';
+import { Contact } from './pages/Contact'
+import { Navbar } from './Navbar'
+import { createContext, useState } from 'react';
+
+export const AppContext = createContext();
 
 function App() {
-  const [excuse,setExcuse] = useState("")
-
-const fetchExcuse = (category) => {
-  axios.get(`https://excuser-three.vercel.app/v1/excuse/${category}/`)
-  .then((res) => {
-  //This Api returns an array of data so we use data[0] in this case.
-  //[{"id":207,"excuse":"My temperature is really high today.","category":"children"}]
-  setExcuse(res.data[0].excuse)
-  })
-}
-
+  const [username, setUsername] = useState('')
   return (
     <div className="App">
-      <h1>Generate an Excuse</h1>
-      <button onClick={() => fetchExcuse("party")}>Party</button>
-      <button onClick={() => fetchExcuse("family")}>Family</button>
-      <button onClick={() => fetchExcuse("office")}>Office</button>
-      <h2>{excuse}</h2>
+      <AppContext.Provider value={{username,setUsername}}>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/profile' element={<Profile />} /> 
+            <Route path='/contact' element={<Contact />} />
+            <Route path='*' element={<h1> 401 : Page not found</h1>} />
+          </Routes>
+        </Router>
+      </AppContext.Provider>
     </div>
   );
 }
 
 export default App;
-
-

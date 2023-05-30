@@ -4,15 +4,20 @@ import { Home } from './pages/Home';
 import { Profile } from './pages/Profile';
 import { Contact } from './pages/Contact'
 import { Navbar } from './Navbar'
-import { createContext, useState } from 'react';
+import { QueryClient,QueryClientProvider} from '@tanstack/react-query'
 
-export const AppContext = createContext();
+
 
 function App() {
-  const [username, setUsername] = useState('')
+  const client = new QueryClient({defaultOptions: {
+    queries: {
+      // it will not refetch the data we change the tab
+      refetchOnWindowFocus:false
+    }
+  }});
   return (
     <div className="App">
-      <AppContext.Provider value={{username,setUsername}}>
+      <QueryClientProvider client={client}>
         <Router>
           <Navbar />
           <Routes>
@@ -22,7 +27,7 @@ function App() {
             <Route path='*' element={<h1> 401 : Page not found</h1>} />
           </Routes>
         </Router>
-      </AppContext.Provider>
+      </QueryClientProvider>
     </div>
   );
 }
